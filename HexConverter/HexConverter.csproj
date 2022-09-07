@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>IconMain.ico</ApplicationIcon>
+    <Title>Hex Converter</Title>
+    <Authors>Alex Kravchenko</Authors>
+    <Copyright>Alex Kravchenko</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="IconMain.ico" />
+  </ItemGroup>
+
+</Project>

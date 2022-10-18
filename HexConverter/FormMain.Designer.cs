@@ -65,6 +65,7 @@ namespace HexConverter
             this.buttonHex1.Name = "buttonHex1";
             this.buttonHex1.Size = new System.Drawing.Size(46, 23);
             this.buttonHex1.TabIndex = 2;
+            this.buttonHex1.TabStop = false;
             this.buttonHex1.Text = "->";
             this.buttonHex1.UseVisualStyleBackColor = true;
             this.buttonHex1.Click += new System.EventHandler(this.ButtonClick);
@@ -75,6 +76,7 @@ namespace HexConverter
             this.buttonDec1.Name = "buttonDec1";
             this.buttonDec1.Size = new System.Drawing.Size(46, 23);
             this.buttonDec1.TabIndex = 3;
+            this.buttonDec1.TabStop = false;
             this.buttonDec1.Text = "<-";
             this.buttonDec1.UseVisualStyleBackColor = true;
             this.buttonDec1.Click += new System.EventHandler(this.ButtonClick);
@@ -84,18 +86,18 @@ namespace HexConverter
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(20, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 15);
+            this.label1.Size = new System.Drawing.Size(76, 15);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Hex";
+            this.label1.Text = "Hexadecimal";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(316, 27);
+            this.label2.Location = new System.Drawing.Point(263, 27);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 15);
+            this.label2.Size = new System.Drawing.Size(103, 15);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Decimal";
+            this.label2.Text = "Unsigned Decimal";
             // 
             // buttonDec2
             // 
@@ -103,6 +105,7 @@ namespace HexConverter
             this.buttonDec2.Name = "buttonDec2";
             this.buttonDec2.Size = new System.Drawing.Size(46, 23);
             this.buttonDec2.TabIndex = 9;
+            this.buttonDec2.TabStop = false;
             this.buttonDec2.Text = "<-";
             this.buttonDec2.UseVisualStyleBackColor = true;
             this.buttonDec2.Click += new System.EventHandler(this.ButtonClick);
@@ -113,6 +116,7 @@ namespace HexConverter
             this.buttonHex2.Name = "buttonHex2";
             this.buttonHex2.Size = new System.Drawing.Size(46, 23);
             this.buttonHex2.TabIndex = 8;
+            this.buttonHex2.TabStop = false;
             this.buttonHex2.Text = "->";
             this.buttonHex2.UseVisualStyleBackColor = true;
             this.buttonHex2.Click += new System.EventHandler(this.ButtonClick);

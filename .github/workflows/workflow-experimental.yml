@@ -7,6 +7,10 @@ on:
 jobs:
   build:
 
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
     runs-on: windows-latest
 
     steps:
@@ -21,6 +25,8 @@ jobs:
     #  run: dotnet build -c Release
       
     - name: Publish
-      run: dotnet publish -c Release -o '.'
+      run: dotnet publish -o '.' -c $env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
      
       

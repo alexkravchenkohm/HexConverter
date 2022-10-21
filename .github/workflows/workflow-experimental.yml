@@ -69,7 +69,7 @@ jobs:
 
     - run: echo "The repo has been copied to ${{ github.workspace }} on the runner."
 
-    - name: list files in the repository
+    - name: List files in the repository
       run: |
         dir ${{ github.workspace }}
 
@@ -79,6 +79,17 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+    
+    - name: Display dotnet version
+      run: dotnet --version
+
+    - run: echo "The preinstalled tools are located here on the runner ${{ runner.tool_chache }}"
+
+    - name: List files in tool cache
+      run: |
+        dir ${{ runner.tool_chache }}
+
+    - run: echo "This job status is ${{ job.status }}"
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe

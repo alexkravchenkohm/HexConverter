@@ -83,11 +83,11 @@ jobs:
     - name: Display dotnet version
       run: dotnet --version
 
-    - run: echo "The preinstalled tools are located here on the runner ${{ runner.tool_chache }}"
+    - run: echo "The preinstalled tools are located here on the runner ${{ runner.tool_cache }}"
 
     - name: List files in tool cache
       run: |
-        dir ${{ runner.tool_chache }}
+        dir ${{ runner.tool_cache }}
 
     - run: echo "This job status is ${{ job.status }}"
 

@@ -71,7 +71,7 @@ jobs:
 
     - name: list files in the repository
       run: |
-        dir ${{ github.repository }}
+        dir ${{ github.workspace }}
 
 
     # Install the .NET Core workload

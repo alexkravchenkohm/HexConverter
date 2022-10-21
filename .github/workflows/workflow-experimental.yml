@@ -29,4 +29,6 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
      
-      
+    - name: List all files in the workspace
+      run: |
+        dir /S /B ${{ github.workspace }}

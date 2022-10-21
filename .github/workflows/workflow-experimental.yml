@@ -25,7 +25,7 @@ jobs:
     #  run: dotnet build -c Release
       
     - name: Publish
-      run: dotnet publish -o '.' -c $env:Configuration
+      run: dotnet publish -o '.\${{ matrix.configuration }}' -c $env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
      

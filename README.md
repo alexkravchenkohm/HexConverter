@@ -1,15 +1,19 @@
 # Introduction 
-This is a simple Windows app, HEX to DECIMAL converter. It fills the UX gap between the existing tools I came across so far.
+This is a simple Windows desktop program, HEX to DECIMAL converter.
 
 # Getting Started
-Now, at the inception of this project I am using Visual Studio 2022 Community Edition. You can use any other environment that can build and debug the code.
+The project was created with Visual Studio 2022 Community Edition.
+You can use any other environment that can build and debug the code.
 
 # Dependencies
-Nothing except .NET 6.
+.NET 6.
 
 # Contribute
-You are welcome to contribute to the project. I selected to use a hybrid between the Gitflow workflow and the GitHub workflow, which means that the pull requests will be coming from feature branches to the develop branch. But the main branch and the release branches will come to the play only if/when we have multiple versions. Therefore:
-- create you own branch like feature/optionalname-improve-something out of the develop
-- improve the code or fix an issue (untracked so far - a description is sufficient)
-- submit a Pull Request towards the develop branch
-- I will review the change and bring it to the develop codeline. Please understand that I might not check this repository for a few weeks. But eventually, I will come to it.
+You are welcome to contribute to the project.
+I selected to use a hybrid between the Gitflow workflow and the GitHub workflow.
+The default branch is 'develop'. It will be taking all the development merges from feature branches.
+The release branch is 'main'. It will be the only release branch for now.
+- create you own branch like feature/optionalname-improve-something out of the 'develop'
+- improve the code or fix an issue (provide description of the change)
+- submit a Pull Request towards the 'develop' branch.
+I will review the change and bring it to the 'develop' branch.

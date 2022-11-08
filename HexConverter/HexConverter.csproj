@@ -6,12 +6,18 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>IconMain.ico</ApplicationIcon>
     <Title>Hex Converter</Title>
-    <Authors>Alex Kravchenko</Authors>
-    <Copyright>Alex Kravchenko</Copyright>
+    <Authors>Alex Kravchenko and contributors</Authors>
+    <Copyright>Alex Kravchenko and contributors</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="IconMain.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Link="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

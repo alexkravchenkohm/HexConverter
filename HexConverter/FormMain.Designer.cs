@@ -155,6 +155,8 @@ namespace HexConverter
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.Text = "Hex Converter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

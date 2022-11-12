@@ -10,9 +10,21 @@ namespace HexConverter
 {
     public partial class FormMain : Form
     {
+        private PersistedState? _state;
+
         public FormMain()
         {
             InitializeComponent();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            RestoreState();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveState();
         }
 
         private void TextBoxKeyDown(object sender, KeyEventArgs e)
@@ -90,5 +102,74 @@ namespace HexConverter
             return false;
         }
 
+        private void RestoreState()
+        {
+            _state = PersistedState.Restore();
+            if (_state == null)
+            {
+                _state = new PersistedState();
+                return;
+            }
+
+            if (_state.Maximised)
+            {
+                Location = _state.Location;
+                WindowState = FormWindowState.Maximized;
+                Size = _state.Size;
+            }
+            else if (_state.Minimised)
+            {
+                Location = _state.Location;
+                WindowState = FormWindowState.Minimized;
+                Size = _state.Size;
+            }
+            else
+            {
+                Location = _state.Location;
+                Size = _state.Size;
+            }
+
+            textBoxHex1.Text = _state.Hex1;
+            textBoxHex2.Text = _state.Hex2;
+            textBoxDec1.Text = _state.Dec1;
+            textBoxDec2.Text = _state.Dec2;
+        }
+
+        private void SaveState()
+        {
+            if (_state == null)
+            {
+                _state = new PersistedState();
+            }
+
+            if (WindowState == FormWindowState.Maximized)
+            {
+                _state.Location = RestoreBounds.Location;
+                _state.Size = RestoreBounds.Size;
+                _state.Maximised = true;
+                _state.Minimised = false;
+            }
+            else if (WindowState == FormWindowState.Normal)
+            {
+                _state.Location = Location;
+                _state.Size = Size;
+                _state.Maximised = false;
+                _state.Minimised = false;
+            }
+            else
+            {
+                _state.Location = RestoreBounds.Location;
+                _state.Size = RestoreBounds.Size;
+                _state.Maximised = false;
+                _state.Minimised = true;
+            }
+
+            _state.Hex1 = textBoxHex1.Text;
+            _state.Hex2 = textBoxHex2.Text;
+            _state.Dec1 = textBoxDec1.Text;
+            _state.Dec2 = textBoxDec2.Text;
+
+            _state.Save();
+        }
     }
 }

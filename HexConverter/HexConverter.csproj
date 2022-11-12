@@ -8,6 +8,7 @@
     <Title>Hex Converter</Title>
     <Authors>Alex Kravchenko and contributors</Authors>
     <Copyright>Alex Kravchenko and contributors</Copyright>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

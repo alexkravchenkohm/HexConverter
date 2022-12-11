@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2022 Alex Kravchenko
 
+using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -19,6 +20,9 @@ namespace HexConverter
         public string Dec1 { get; set; } = string.Empty;
         public string Dec2 { get; set; } = string.Empty;
 
+        public string Format1 { get; set; } = string.Empty;
+        public string Format2 { get; set; } = string.Empty;
+
         private static string GetFileName()
         {
             var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -28,7 +32,8 @@ namespace HexConverter
 
         internal void Save()
         {
-            string jsonString = JsonSerializer.Serialize(this);
+            JsonSerializerOptions options = new() { WriteIndented = true };
+            string jsonString = JsonSerializer.Serialize(this, options);
 
             File.WriteAllText(GetFileName(), jsonString);
         }

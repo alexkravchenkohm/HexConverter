@@ -41,6 +41,8 @@ namespace HexConverter
             this.buttonHex2 = new System.Windows.Forms.Button();
             this.textBoxDec2 = new System.Windows.Forms.TextBox();
             this.textBoxHex2 = new System.Windows.Forms.TextBox();
+            this.comboBoxFormat1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxFormat2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxHex1
@@ -93,11 +95,11 @@ namespace HexConverter
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(263, 27);
+            this.label2.Location = new System.Drawing.Point(266, 27);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 15);
+            this.label2.Size = new System.Drawing.Size(62, 15);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Unsigned Decimal";
+            this.label2.Text = "Converted";
             // 
             // buttonDec2
             // 
@@ -137,11 +139,31 @@ namespace HexConverter
             this.textBoxHex2.TabIndex = 6;
             this.textBoxHex2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             // 
+            // comboBoxFormat1
+            // 
+            this.comboBoxFormat1.FormattingEnabled = true;
+            this.comboBoxFormat1.Location = new System.Drawing.Point(378, 56);
+            this.comboBoxFormat1.Name = "comboBoxFormat1";
+            this.comboBoxFormat1.Size = new System.Drawing.Size(75, 23);
+            this.comboBoxFormat1.TabIndex = 10;
+            this.comboBoxFormat1.TabStop = false;
+            // 
+            // comboBoxFormat2
+            // 
+            this.comboBoxFormat2.FormattingEnabled = true;
+            this.comboBoxFormat2.Location = new System.Drawing.Point(378, 96);
+            this.comboBoxFormat2.Name = "comboBoxFormat2";
+            this.comboBoxFormat2.Size = new System.Drawing.Size(75, 23);
+            this.comboBoxFormat2.TabIndex = 11;
+            this.comboBoxFormat2.TabStop = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 143);
+            this.ClientSize = new System.Drawing.Size(465, 143);
+            this.Controls.Add(this.comboBoxFormat2);
+            this.Controls.Add(this.comboBoxFormat1);
             this.Controls.Add(this.buttonDec2);
             this.Controls.Add(this.buttonHex2);
             this.Controls.Add(this.textBoxDec2);
@@ -174,6 +196,8 @@ namespace HexConverter
         private System.Windows.Forms.Button buttonHex2;
         private System.Windows.Forms.TextBox textBoxDec2;
         private System.Windows.Forms.TextBox textBoxHex2;
+        private System.Windows.Forms.ComboBox comboBoxFormat1;
+        private System.Windows.Forms.ComboBox comboBoxFormat2;
     }
 }
 

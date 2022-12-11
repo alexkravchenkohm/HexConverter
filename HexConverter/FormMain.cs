@@ -2,7 +2,6 @@
 
 using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.Media;
 using System.Windows.Forms;
 
@@ -15,6 +14,19 @@ namespace HexConverter
         public FormMain()
         {
             InitializeComponent();
+
+            PopulateFormats(comboBoxFormat1);
+            PopulateFormats(comboBoxFormat2);
+        }
+
+        private void PopulateFormats(ComboBox comboBox)
+        {
+            foreach (var item in HexConverter.FormatStrings)
+            {
+                comboBox.Items.Add(item);
+            }
+
+            comboBox.SelectedIndex = 0;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -58,48 +70,38 @@ namespace HexConverter
             string suffix = controlName.Substring(controlName.Length - 4, 4);
             var converted = suffix switch
             {
-                "Hex1" => ConvertFromHex(textBoxHex1, textBoxDec1),
-                "Dec1" => ConvertFromDec(textBoxHex1, textBoxDec1),
-                "Hex2" => ConvertFromHex(textBoxHex2, textBoxDec2),
-                "Dec2" => ConvertFromDec(textBoxHex2, textBoxDec2),
+                "Hex1" => ConvertFromHex(textBoxHex1, textBoxDec1, comboBoxFormat1),
+                "Dec1" => ConvertFromDec(textBoxHex1, textBoxDec1, comboBoxFormat1),
+                "Hex2" => ConvertFromHex(textBoxHex2, textBoxDec2, comboBoxFormat2),
+                "Dec2" => ConvertFromDec(textBoxHex2, textBoxDec2, comboBoxFormat2),
                 _ => false,
             };
 
             return converted;
         }
 
-        private static bool ConvertFromHex(TextBox textBoxHex, TextBox textBoxDec)
+        private static bool ConvertFromHex(TextBox textBoxHex, TextBox textBoxDec, ComboBox comboBoxFormat)
         {
             var text = textBoxHex.Text;
-            
-            if (text.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
-            {
-                text = text[2..];
-            }
-            else if (text.EndsWith("h", StringComparison.OrdinalIgnoreCase))
-            {
-                text = text[..^1];
-            }
 
-            if (ulong.TryParse(text, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out ulong hex))
-            {
-                textBoxDec.Text = hex.ToString(CultureInfo.CurrentCulture);
-                return true;
-            }
+            var dec = HexConverter.ConvertFromHex(text, comboBoxFormat.Text);
+            if (dec == null)
+                return false;
 
-            return false;
+            textBoxDec.Text = dec;
+            return true;
         }
 
-        private static bool ConvertFromDec(TextBox textBoxHex, TextBox textBoxDec)
+        private static bool ConvertFromDec(TextBox textBoxHex, TextBox textBoxDec, ComboBox comboBoxFormat)
         {
             var text = textBoxDec.Text;
-            if (ulong.TryParse(text, NumberStyles.Integer, CultureInfo.CurrentCulture, out ulong dec))
-            {
-                textBoxHex.Text = dec.ToString("x");
-                return true;
-            }
 
-            return false;
+            var hex = HexConverter.ConvertFromDec(text, comboBoxFormat.Text);
+            if (hex == null)
+                return false;
+
+            textBoxHex.Text = hex;
+            return true;
         }
 
         private void RestoreState()
@@ -133,6 +135,9 @@ namespace HexConverter
             textBoxHex2.Text = _state.Hex2;
             textBoxDec1.Text = _state.Dec1;
             textBoxDec2.Text = _state.Dec2;
+
+            comboBoxFormat1.SelectedItem = _state.Format1;
+            comboBoxFormat2.SelectedItem = _state.Format2;
         }
 
         private void SaveState()
@@ -168,6 +173,9 @@ namespace HexConverter
             _state.Hex2 = textBoxHex2.Text;
             _state.Dec1 = textBoxDec1.Text;
             _state.Dec2 = textBoxDec2.Text;
+
+            _state.Format1 = (string)comboBoxFormat1.SelectedItem;
+            _state.Format2 = (string)comboBoxFormat2.SelectedItem;
 
             _state.Save();
         }

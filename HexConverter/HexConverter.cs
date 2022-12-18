@@ -113,23 +113,34 @@ namespace HexConverter
                     }
                     break;
                 case Format.ASCII:
-                    {
-                        // For now just expecting up to 8-byte strings interpreted as big-endian ASCII characters.
-                        // TODO: add support for free-form coma-separated lists.
-                        if (ulong.TryParse(hex, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var val))
-                        {
-                            var bytes = BitConverter.GetBytes(BinaryPrimitives.ReverseEndianness(val));
-                            var text = Encoding.UTF8.GetString(bytes); 
-                            text = text.TrimStart('\0');
-                            return Regex.Replace(text, @"[^\u001F-\u007F]", "\u001a");  // Non printable are substituted with 0x1a "SUB"
-                        }
-                    }
-                    break;
+                    return GetAscii(hex);
                 default:
                     break;
             }
 
             return null;
+        }
+
+        private static string? GetAscii(string hex)
+        {
+            var tokens = hex.Split(new char[] {'-', ' ', ','}, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            var ret = string.Empty;
+            foreach (var token in tokens)
+            {
+                if (!ulong.TryParse(token, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var val))
+                {
+                    return null;
+                }
+                var bytes = BitConverter.GetBytes(BinaryPrimitives.ReverseEndianness(val));
+                var text = Encoding.UTF8.GetString(bytes);
+                text = text.TrimStart('\0');
+                ret += text;
+            }
+
+            // Non-printable are substituted with 0x1a "SUB".
+            // TODO: consider preserving all non-printable and substitute on the very top of UI.
+            return Regex.Replace(ret, @"[^\u001F-\u007F]", "\u001a");  
         }
 
         public static string? ConvertFromDec(string text, string formatName)

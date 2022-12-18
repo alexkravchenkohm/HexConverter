@@ -133,14 +133,12 @@ namespace HexConverter
                     return null;
                 }
                 var bytes = BitConverter.GetBytes(BinaryPrimitives.ReverseEndianness(val));
-                var text = Encoding.UTF8.GetString(bytes);
+                var text = Encoding.ASCII.GetString(bytes);
                 text = text.TrimStart('\0');
                 ret += text;
             }
 
-            // Non-printable are substituted with 0x1a "SUB".
-            // TODO: consider preserving all non-printable and substitute on the very top of UI.
-            return Regex.Replace(ret, @"[^\u001F-\u007F]", "\u001a");  
+            return ret;
         }
 
         public static string? ConvertFromDec(string text, string formatName)
@@ -223,8 +221,8 @@ namespace HexConverter
                     }
                     break;
                 case Format.ASCII:
-                    var bytes = Encoding.UTF8.GetBytes(text);
-                    if (bytes.Length > 0 && Array.IndexOf(bytes, 0x1a) < 0)   // reject values containing the substitute character 
+                    var bytes = Encoding.ASCII.GetBytes(text);
+                    if (bytes.Length > 0)
                     {
                         // This code trims the string to 8 bytes. An alternative approach is rejecting it.
                         var eightBytes = new byte[8];

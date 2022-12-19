@@ -1,6 +1,5 @@
 ﻿// Copyright (c) 2022 Alex Kravchenko
 
-using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -20,8 +19,13 @@ namespace HexConverter
         public string Dec1 { get; set; } = string.Empty;
         public string Dec2 { get; set; } = string.Empty;
 
-        public string Format1 { get; set; } = string.Empty;
-        public string Format2 { get; set; } = string.Empty;
+        public string FormatDec1 { get; set; } = string.Empty;
+        public string FormatDec2 { get; set; } = string.Empty;
+
+        public bool IsDirtyHex1 { get; set; }
+        public bool IsDirtyHex2 { get; set; }
+        public bool IsDirtyDec1 { get; set; }
+        public bool IsDirtyDec2 { get; set; }
 
         private static string GetFileName()
         {

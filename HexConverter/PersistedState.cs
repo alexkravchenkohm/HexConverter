@@ -27,6 +27,8 @@ namespace HexConverter
         public bool IsDirtyDec1 { get; set; }
         public bool IsDirtyDec2 { get; set; }
 
+        public bool ShowFormatDecChecked { get; set; }
+
         private static string GetFileName()
         {
             var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

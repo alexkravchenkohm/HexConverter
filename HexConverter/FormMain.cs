@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.AxHost;
 
 namespace HexConverter
 {
@@ -21,6 +22,96 @@ namespace HexConverter
             PopulateFormats(comboBoxFormatDec2);
             
             InitializeDirtyFlags();
+        }
+
+        private void RestoreState()
+        {
+            _state = PersistedState.Restore();
+            if (_state == null)
+            {
+                _state = new PersistedState();
+                return;
+            }
+
+            if (_state.Maximised)
+            {
+                Location = _state.Location;
+                WindowState = FormWindowState.Maximized;
+                Size = _state.Size;
+            }
+            else if (_state.Minimised)
+            {
+                Location = _state.Location;
+                WindowState = FormWindowState.Minimized;
+                Size = _state.Size;
+            }
+            else
+            {
+                Location = _state.Location;
+                Size = _state.Size;
+            }
+
+            textBoxHex1.Text = _state.Hex1;
+            textBoxHex2.Text = _state.Hex2;
+            textBoxDec1.Text = _state.Dec1;
+            textBoxDec2.Text = _state.Dec2;
+
+            comboBoxFormatDec1.SelectedItem = _state.FormatDec1;
+            comboBoxFormatDec2.SelectedItem = _state.FormatDec2;
+
+            textBoxHex1.Tag = _state.IsDirtyHex1;
+            textBoxHex2.Tag = _state.IsDirtyHex2;
+            textBoxDec1.Tag = _state.IsDirtyDec1;
+            textBoxDec2.Tag = _state.IsDirtyDec2;
+
+            formatDecToolStripButton.Checked = _state.ShowFormatDecChecked;
+        }
+
+        private void SaveState()
+        {
+            if (_state == null)
+            {
+                _state = new PersistedState();
+            }
+
+            if (WindowState == FormWindowState.Maximized)
+            {
+                _state.Location = RestoreBounds.Location;
+                _state.Size = RestoreBounds.Size;
+                _state.Maximised = true;
+                _state.Minimised = false;
+            }
+            else if (WindowState == FormWindowState.Normal)
+            {
+                _state.Location = Location;
+                _state.Size = Size;
+                _state.Maximised = false;
+                _state.Minimised = false;
+            }
+            else
+            {
+                _state.Location = RestoreBounds.Location;
+                _state.Size = RestoreBounds.Size;
+                _state.Maximised = false;
+                _state.Minimised = true;
+            }
+
+            _state.Hex1 = textBoxHex1.Text;
+            _state.Hex2 = textBoxHex2.Text;
+            _state.Dec1 = textBoxDec1.Text;
+            _state.Dec2 = textBoxDec2.Text;
+
+            _state.FormatDec1 = (string)comboBoxFormatDec1.SelectedItem;
+            _state.FormatDec2 = (string)comboBoxFormatDec2.SelectedItem;
+
+            _state.IsDirtyHex1 = (bool)textBoxHex1.Tag;
+            _state.IsDirtyHex2 = (bool)textBoxHex2.Tag;
+            _state.IsDirtyDec1 = (bool)textBoxDec1.Tag;
+            _state.IsDirtyDec2 = (bool)textBoxDec2.Tag;
+
+            _state.ShowFormatDecChecked = formatDecToolStripButton.Checked;
+
+            _state.Save();
         }
 
         private void FormMain_Activated(object sender, EventArgs e)
@@ -52,7 +143,23 @@ namespace HexConverter
             RestoreState();
 
             RefreshDirtyStates();
+
+            RefreshFormatControls();
         }
+
+        private void RefreshFormatControls()
+        {
+            if (formatDecToolStripButton.Checked)
+            {
+                comboBoxFormatDec1.Show();
+                comboBoxFormatDec2.Show();
+            }
+            else
+            {
+                comboBoxFormatDec1.Hide();
+                comboBoxFormatDec2.Hide();
+            }
+       }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -167,90 +274,60 @@ namespace HexConverter
             return true;
         }
 
-        private void RestoreState()
+        private void FormatDecToolStripButton_Click(object sender, EventArgs e)
         {
-            _state = PersistedState.Restore();
-            if (_state == null)
+            if (sender is ToolStripButton btn)
             {
-                _state = new PersistedState();
-                return;
+                if (btn.Checked)
+                {
+                    ShowFormatsDec();
+                }
+                else
+                {
+                    HideFormatsDec();
+                }
             }
-
-            if (_state.Maximised)
-            {
-                Location = _state.Location;
-                WindowState = FormWindowState.Maximized;
-                Size = _state.Size;
-            }
-            else if (_state.Minimised)
-            {
-                Location = _state.Location;
-                WindowState = FormWindowState.Minimized;
-                Size = _state.Size;
-            }
-            else
-            {
-                Location = _state.Location;
-                Size = _state.Size;
-            }
-
-            textBoxHex1.Text = _state.Hex1;
-            textBoxHex2.Text = _state.Hex2;
-            textBoxDec1.Text = _state.Dec1;
-            textBoxDec2.Text = _state.Dec2;
-
-            comboBoxFormatDec1.SelectedItem = _state.FormatDec1;
-            comboBoxFormatDec2.SelectedItem = _state.FormatDec2;
-
-            textBoxHex1.Tag = _state.IsDirtyHex1;
-            textBoxHex2.Tag = _state.IsDirtyHex2;
-            textBoxDec1.Tag = _state.IsDirtyDec1;
-            textBoxDec2.Tag = _state.IsDirtyDec2;
+            SetAllTextBoxesDirty();
         }
 
-        private void SaveState()
+        private void SetAllTextBoxesDirty()
         {
-            if (_state == null)
+            SetDirty(textBoxHex1, true);
+            SetDirty(textBoxHex2, true);
+            SetDirty(textBoxDec1, true);
+            SetDirty(textBoxDec2, true);
+        }
+
+        private void HideFormatsDec()
+        {
+            comboBoxFormatDec1.Hide();
+            comboBoxFormatDec2.Hide();
+            labelDec.Text = "Decimal";
+            comboBoxFormatDec1.SelectedItem = "UINT64";
+        }
+
+        private void ShowFormatsDec()
+        {
+            comboBoxFormatDec1.Show();
+            comboBoxFormatDec2.Show();
+            labelDec.Text = "Converted";
+        }
+
+        private void ComboBoxFormatDecChanged(object sender, EventArgs e)
+        {
+            if (sender is ComboBox cb)
             {
-                _state = new PersistedState();
+                if (cb.Name == "comboBoxFormatDec1")
+                {
+                    SetDirty(textBoxHex1, true);
+                    SetDirty(textBoxDec1, true);
+                }
+                else if (cb.Name == "comboBoxFormatDec2")
+                {
+                    SetDirty(textBoxHex2, true);
+                    SetDirty(textBoxDec2, true);
+                }
             }
-
-            if (WindowState == FormWindowState.Maximized)
-            {
-                _state.Location = RestoreBounds.Location;
-                _state.Size = RestoreBounds.Size;
-                _state.Maximised = true;
-                _state.Minimised = false;
-            }
-            else if (WindowState == FormWindowState.Normal)
-            {
-                _state.Location = Location;
-                _state.Size = Size;
-                _state.Maximised = false;
-                _state.Minimised = false;
-            }
-            else
-            {
-                _state.Location = RestoreBounds.Location;
-                _state.Size = RestoreBounds.Size;
-                _state.Maximised = false;
-                _state.Minimised = true;
-            }
-
-            _state.Hex1 = textBoxHex1.Text;
-            _state.Hex2 = textBoxHex2.Text;
-            _state.Dec1 = textBoxDec1.Text;
-            _state.Dec2 = textBoxDec2.Text;
-
-            _state.FormatDec1 = (string)comboBoxFormatDec1.SelectedItem;
-            _state.FormatDec2 = (string)comboBoxFormatDec2.SelectedItem;
-
-            _state.IsDirtyHex1 = (bool)textBoxHex1.Tag;
-            _state.IsDirtyHex2 = (bool)textBoxHex2.Tag;
-            _state.IsDirtyDec1 = (bool)textBoxDec1.Tag;
-            _state.IsDirtyDec2 = (bool)textBoxDec2.Tag;
-
-            _state.Save();
         }
     }
 }

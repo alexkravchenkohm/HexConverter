@@ -214,6 +214,7 @@ namespace HexConverter
             this.copyToolStripButton.Name = "copyToolStripButton";
             this.copyToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.copyToolStripButton.Text = "&Copy";
+            this.copyToolStripButton.Click += new System.EventHandler(this.CopyToolStripButton_Click);
             // 
             // pasteToolStripButton
             // 
@@ -223,6 +224,7 @@ namespace HexConverter
             this.pasteToolStripButton.Name = "pasteToolStripButton";
             this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.pasteToolStripButton.Text = "&Paste";
+            this.pasteToolStripButton.Click += new System.EventHandler(this.PasteToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 

@@ -5,8 +5,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.AxHost;
 
 namespace HexConverter
 {
@@ -20,7 +18,7 @@ namespace HexConverter
 
             PopulateFormats(comboBoxFormatDec1);
             PopulateFormats(comboBoxFormatDec2);
-            
+
             InitializeDirtyFlags();
         }
 
@@ -69,10 +67,7 @@ namespace HexConverter
 
         private void SaveState()
         {
-            if (_state == null)
-            {
-                _state = new PersistedState();
-            }
+            _state ??= new PersistedState();
 
             if (WindowState == FormWindowState.Maximized)
             {
@@ -159,7 +154,7 @@ namespace HexConverter
                 comboBoxFormatDec1.Hide();
                 comboBoxFormatDec2.Hide();
             }
-       }
+        }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -177,7 +172,7 @@ namespace HexConverter
         private static void RefreshDirtyState(TextBox textBox)
         {
             bool dirty = (bool)(textBox.Tag);
-            textBox.Font = dirty ? 
+            textBox.Font = dirty ?
                 new Font(textBox.Font, FontStyle.Italic) :
                 new Font(textBox.Font, FontStyle.Bold);
             textBox.ForeColor = dirty ?
@@ -304,6 +299,7 @@ namespace HexConverter
             comboBoxFormatDec2.Hide();
             labelDec.Text = "Decimal";
             comboBoxFormatDec1.SelectedItem = "UINT64";
+            comboBoxFormatDec2.SelectedItem = "UINT64";
         }
 
         private void ShowFormatsDec()
@@ -328,6 +324,34 @@ namespace HexConverter
                     SetDirty(textBoxDec2, true);
                 }
             }
+        }
+
+        private void CopyToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (ActiveControl is not TextBox tb)
+                return;
+
+            // If nothing selected, then copy all the text from the textBox.
+            // Remark: this is intentionally inconsistent with Control-C and Control-Ins behavior.
+            string? ct = !string.IsNullOrEmpty(tb.SelectedText) ?
+                tb.SelectedText :
+                tb.Text;
+            if (!string.IsNullOrEmpty(ct))
+            {
+                Clipboard.SetText(ct);
+            }
+        }
+
+        private void PasteToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (ActiveControl is not TextBox tb)
+                return;
+
+            var ct = Clipboard.GetText();
+            if (string.IsNullOrEmpty(ct))
+                return;
+
+            tb.Paste(ct);
         }
     }
 }

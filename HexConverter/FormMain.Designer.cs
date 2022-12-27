@@ -56,9 +56,9 @@ namespace HexConverter
             // textBoxHex1
             // 
             this.textBoxHex1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxHex1.Location = new System.Drawing.Point(20, 70);
+            this.textBoxHex1.Location = new System.Drawing.Point(21, 70);
             this.textBoxHex1.Name = "textBoxHex1";
-            this.textBoxHex1.Size = new System.Drawing.Size(110, 22);
+            this.textBoxHex1.Size = new System.Drawing.Size(118, 22);
             this.textBoxHex1.TabIndex = 0;
             this.textBoxHex1.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             this.textBoxHex1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
@@ -66,7 +66,7 @@ namespace HexConverter
             // textBoxDec1
             // 
             this.textBoxDec1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxDec1.Location = new System.Drawing.Point(266, 70);
+            this.textBoxDec1.Location = new System.Drawing.Point(276, 70);
             this.textBoxDec1.Name = "textBoxDec1";
             this.textBoxDec1.Size = new System.Drawing.Size(110, 22);
             this.textBoxDec1.TabIndex = 1;
@@ -75,7 +75,7 @@ namespace HexConverter
             // 
             // buttonHex1
             // 
-            this.buttonHex1.Location = new System.Drawing.Point(143, 69);
+            this.buttonHex1.Location = new System.Drawing.Point(153, 69);
             this.buttonHex1.Name = "buttonHex1";
             this.buttonHex1.Size = new System.Drawing.Size(46, 23);
             this.buttonHex1.TabIndex = 2;
@@ -86,7 +86,7 @@ namespace HexConverter
             // 
             // buttonDec1
             // 
-            this.buttonDec1.Location = new System.Drawing.Point(208, 70);
+            this.buttonDec1.Location = new System.Drawing.Point(218, 70);
             this.buttonDec1.Name = "buttonDec1";
             this.buttonDec1.Size = new System.Drawing.Size(46, 23);
             this.buttonDec1.TabIndex = 3;
@@ -107,7 +107,7 @@ namespace HexConverter
             // labelDec
             // 
             this.labelDec.AutoSize = true;
-            this.labelDec.Location = new System.Drawing.Point(266, 40);
+            this.labelDec.Location = new System.Drawing.Point(276, 40);
             this.labelDec.Name = "labelDec";
             this.labelDec.Size = new System.Drawing.Size(62, 15);
             this.labelDec.TabIndex = 5;
@@ -115,7 +115,7 @@ namespace HexConverter
             // 
             // buttonDec2
             // 
-            this.buttonDec2.Location = new System.Drawing.Point(208, 110);
+            this.buttonDec2.Location = new System.Drawing.Point(218, 110);
             this.buttonDec2.Name = "buttonDec2";
             this.buttonDec2.Size = new System.Drawing.Size(46, 23);
             this.buttonDec2.TabIndex = 9;
@@ -126,7 +126,7 @@ namespace HexConverter
             // 
             // buttonHex2
             // 
-            this.buttonHex2.Location = new System.Drawing.Point(143, 109);
+            this.buttonHex2.Location = new System.Drawing.Point(153, 109);
             this.buttonHex2.Name = "buttonHex2";
             this.buttonHex2.Size = new System.Drawing.Size(46, 23);
             this.buttonHex2.TabIndex = 8;
@@ -138,7 +138,7 @@ namespace HexConverter
             // textBoxDec2
             // 
             this.textBoxDec2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxDec2.Location = new System.Drawing.Point(266, 110);
+            this.textBoxDec2.Location = new System.Drawing.Point(276, 110);
             this.textBoxDec2.Name = "textBoxDec2";
             this.textBoxDec2.Size = new System.Drawing.Size(110, 22);
             this.textBoxDec2.TabIndex = 7;
@@ -148,9 +148,9 @@ namespace HexConverter
             // textBoxHex2
             // 
             this.textBoxHex2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxHex2.Location = new System.Drawing.Point(20, 110);
+            this.textBoxHex2.Location = new System.Drawing.Point(21, 110);
             this.textBoxHex2.Name = "textBoxHex2";
-            this.textBoxHex2.Size = new System.Drawing.Size(110, 22);
+            this.textBoxHex2.Size = new System.Drawing.Size(118, 22);
             this.textBoxHex2.TabIndex = 6;
             this.textBoxHex2.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             this.textBoxHex2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
@@ -158,7 +158,7 @@ namespace HexConverter
             // comboBoxFormatDec1
             // 
             this.comboBoxFormatDec1.FormattingEnabled = true;
-            this.comboBoxFormatDec1.Location = new System.Drawing.Point(388, 69);
+            this.comboBoxFormatDec1.Location = new System.Drawing.Point(398, 69);
             this.comboBoxFormatDec1.Name = "comboBoxFormatDec1";
             this.comboBoxFormatDec1.Size = new System.Drawing.Size(75, 23);
             this.comboBoxFormatDec1.TabIndex = 10;
@@ -168,7 +168,7 @@ namespace HexConverter
             // comboBoxFormatDec2
             // 
             this.comboBoxFormatDec2.FormattingEnabled = true;
-            this.comboBoxFormatDec2.Location = new System.Drawing.Point(388, 109);
+            this.comboBoxFormatDec2.Location = new System.Drawing.Point(398, 109);
             this.comboBoxFormatDec2.Name = "comboBoxFormatDec2";
             this.comboBoxFormatDec2.Size = new System.Drawing.Size(75, 23);
             this.comboBoxFormatDec2.TabIndex = 11;
@@ -186,7 +186,7 @@ namespace HexConverter
             this.helpToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(480, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(491, 25);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -242,7 +242,7 @@ namespace HexConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 153);
+            this.ClientSize = new System.Drawing.Size(491, 153);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.comboBoxFormatDec2);
             this.Controls.Add(this.comboBoxFormatDec1);

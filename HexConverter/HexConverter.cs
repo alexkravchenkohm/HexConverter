@@ -1,10 +1,8 @@
 ﻿// Copyright (c) 2022 Alex Kravchenko
 
 using System;
-using System.Buffers.Binary;
 using System.Globalization;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace HexConverter
 {
@@ -123,22 +121,29 @@ namespace HexConverter
 
         private static string? GetAscii(string hex)
         {
-            var tokens = hex.Split(new char[] {'-', ' ', ','}, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var tokens = hex.Split(new char[] { '-', ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-            var ret = string.Empty;
-            foreach (var token in tokens)
+            var sb = new StringBuilder();
+            foreach (var item in tokens)
             {
-                if (!ulong.TryParse(token, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var val))
+                // add "0" char to the front of each token if length is odd
+                var token = (item.Length % 2 == 0) ? item : "0" + item;
+                // link the tokens back
+                sb.Append(token);
+            }
+            var normalized = sb.ToString();
+
+            var bytes = new byte[normalized.Length / 2];
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                if (!byte.TryParse(normalized.AsSpan(i * 2, 2), NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var bval))
                 {
                     return null;
                 }
-                var bytes = BitConverter.GetBytes(BinaryPrimitives.ReverseEndianness(val));
-                var text = Encoding.ASCII.GetString(bytes);
-                text = text.TrimStart('\0');
-                ret += text;
+                bytes[i] = bval;
             }
 
-            return ret;
+            return Encoding.ASCII.GetString(bytes);
         }
 
         public static string? ConvertFromDec(string text, string formatName)
@@ -222,20 +227,7 @@ namespace HexConverter
                     break;
                 case Format.ASCII:
                     var bytes = Encoding.ASCII.GetBytes(text);
-                    if (bytes.Length > 0)
-                    {
-                        // This code trims the string to 8 bytes. An alternative approach is rejecting it.
-                        var eightBytes = new byte[8];
-                        for (int i = 0; i < bytes.Length && i < eightBytes.Length; i++)
-                        {
-                            // Only taking eight bytes from the tail
-                            eightBytes[eightBytes.Length - 1 - i] = bytes[bytes.Length - 1 - i];
-                        }
-                        var ul = BitConverter.ToUInt64(eightBytes, 0);
-                        ul = BinaryPrimitives.ReverseEndianness(ul);
-                        return ul.ToString("x");
-                    }
-                    break;
+                    return BitConverter.ToString(bytes).Replace("-", string.Empty);
                 default:
                     break;
             }

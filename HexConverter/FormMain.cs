@@ -10,6 +10,9 @@ namespace HexConverter
 {
     public partial class FormMain : Form
     {
+        private const int WidthExtended = 517;
+        private const int WidthCompact = 422;
+
         private PersistedState? _state;
 
         public FormMain()
@@ -46,7 +49,7 @@ namespace HexConverter
             else
             {
                 Location = _state.Location;
-                Size = _state.Size;
+                //Size = _state.Size;
             }
 
             textBoxHex1.Text = _state.Hex1;
@@ -146,13 +149,13 @@ namespace HexConverter
         {
             if (formatDecToolStripButton.Checked)
             {
-                comboBoxFormatDec1.Show();
-                comboBoxFormatDec2.Show();
+                Width = WidthExtended;
+                panelFormatsDec.Show();
             }
             else
             {
-                comboBoxFormatDec1.Hide();
-                comboBoxFormatDec2.Hide();
+                Width = WidthCompact;
+                panelFormatsDec.Hide();
             }
         }
 
@@ -295,17 +298,17 @@ namespace HexConverter
 
         private void HideFormatsDec()
         {
-            comboBoxFormatDec1.Hide();
-            comboBoxFormatDec2.Hide();
-            labelDec.Text = "Decimal";
+            Width = WidthCompact;
+            panelFormatsDec.Hide();
+            labelDec.Text = "Decimal as UINT64";
             comboBoxFormatDec1.SelectedItem = "UINT64";
             comboBoxFormatDec2.SelectedItem = "UINT64";
         }
 
         private void ShowFormatsDec()
         {
-            comboBoxFormatDec1.Show();
-            comboBoxFormatDec2.Show();
+            Width = WidthExtended;
+            panelFormatsDec.Show();
             labelDec.Text = "Converted";
         }
 

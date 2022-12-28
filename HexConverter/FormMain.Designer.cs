@@ -50,7 +50,9 @@ namespace HexConverter
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.panelFormatsDec = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
+            this.panelFormatsDec.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxHex1
@@ -158,7 +160,7 @@ namespace HexConverter
             // comboBoxFormatDec1
             // 
             this.comboBoxFormatDec1.FormattingEnabled = true;
-            this.comboBoxFormatDec1.Location = new System.Drawing.Point(398, 69);
+            this.comboBoxFormatDec1.Location = new System.Drawing.Point(12, 69);
             this.comboBoxFormatDec1.Name = "comboBoxFormatDec1";
             this.comboBoxFormatDec1.Size = new System.Drawing.Size(75, 23);
             this.comboBoxFormatDec1.TabIndex = 10;
@@ -168,7 +170,7 @@ namespace HexConverter
             // comboBoxFormatDec2
             // 
             this.comboBoxFormatDec2.FormattingEnabled = true;
-            this.comboBoxFormatDec2.Location = new System.Drawing.Point(398, 109);
+            this.comboBoxFormatDec2.Location = new System.Drawing.Point(12, 110);
             this.comboBoxFormatDec2.Name = "comboBoxFormatDec2";
             this.comboBoxFormatDec2.Size = new System.Drawing.Size(75, 23);
             this.comboBoxFormatDec2.TabIndex = 11;
@@ -186,7 +188,7 @@ namespace HexConverter
             this.helpToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(491, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(504, 25);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -240,14 +242,21 @@ namespace HexConverter
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
+            // panelFormatsDec
+            // 
+            this.panelFormatsDec.Controls.Add(this.comboBoxFormatDec1);
+            this.panelFormatsDec.Controls.Add(this.comboBoxFormatDec2);
+            this.panelFormatsDec.Location = new System.Drawing.Point(392, 0);
+            this.panelFormatsDec.Name = "panelFormatsDec";
+            this.panelFormatsDec.Size = new System.Drawing.Size(113, 155);
+            this.panelFormatsDec.TabIndex = 13;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 153);
+            this.ClientSize = new System.Drawing.Size(504, 155);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.comboBoxFormatDec2);
-            this.Controls.Add(this.comboBoxFormatDec1);
             this.Controls.Add(this.buttonDec2);
             this.Controls.Add(this.buttonHex2);
             this.Controls.Add(this.textBoxDec2);
@@ -258,6 +267,8 @@ namespace HexConverter
             this.Controls.Add(this.buttonHex1);
             this.Controls.Add(this.textBoxDec1);
             this.Controls.Add(this.textBoxHex1);
+            this.Controls.Add(this.panelFormatsDec);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
@@ -268,6 +279,7 @@ namespace HexConverter
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.panelFormatsDec.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,6 +306,7 @@ namespace HexConverter
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
+        private System.Windows.Forms.Panel panelFormatsDec;
     }
 }
 

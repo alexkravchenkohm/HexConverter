@@ -1,37 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿// Copyright (c) 2022 Alex Kravchenko
+
+using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HexConverter
 {
     partial class AboutBoxMain : Form
     {
+        private const string LinkDataLicense = "LICENSE.txt";
+        private const string LinkDataSource = @"https://github.com/alexkravchenkohm/HexConverter";
+        private const string LinkDataBinaries = @"https://github.com/alexkravchenkohm/HexConverter/releases";
+
         public AboutBoxMain()
         {
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
-            //this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
-            //this.labelCompanyName.Text = AssemblyCompany;
-            //this.textBoxDescription.Text = AssemblyDescription;
         }
 
         private void AboutBoxMain_Load(object sender, EventArgs e)
         {
-            linkLabelLicense.Links.Add(new LinkLabel.Link() { LinkData = "LICENSE"});
+            var toolTip = new ToolTip();
+            toolTip.SetToolTip(linkLabelLicense, LinkDataLicense);
+            toolTip.SetToolTip(linkLabelSource, LinkDataSource);
+            toolTip.SetToolTip(linkLabelBinaries, LinkDataBinaries);
+
+            linkLabelLicense.Links.Add(new LinkLabel.Link() { LinkData = LinkDataLicense });
         }
 
         #region Assembly Attribute Accessors
 
-        public string AssemblyTitle
+        public static string AssemblyTitle
         {
             get
             {
@@ -48,41 +51,15 @@ namespace HexConverter
             }
         }
 
-        public string AssemblyVersion
+        public static string? AssemblyVersion
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return Assembly.GetExecutingAssembly().GetName().Version?.ToString();
             }
         }
 
-        public string AssemblyDescription
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
-            }
-        }
-
-        public string AssemblyProduct
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyProductAttribute)attributes[0]).Product;
-            }
-        }
-
-        public string AssemblyCopyright
+        public static string AssemblyCopyright
         {
             get
             {
@@ -94,25 +71,11 @@ namespace HexConverter
                 return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
         }
-
-        public string AssemblyCompany
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
-            }
-        }
         #endregion
 
         private void LinkLabelLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var fileName = e.Link.LinkData as string;
-            if (fileName == null)
+            if (e.Link.LinkData is not string fileName)
                 return;
             var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (directory == null)
@@ -128,12 +91,11 @@ namespace HexConverter
             p.Start();
         }
 
-        private void linkLabelSource_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabelSource_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var p = new Process
             {
-                //StartInfo = new ProcessStartInfo(@"https://github.com/alexkravchenkohm/HexConverter/tree/v1.0.1-alpha")
-                StartInfo = new ProcessStartInfo(@"https://github.com/alexkravchenkohm/HexConverter")
+                StartInfo = new ProcessStartInfo(LinkDataSource)
                 {
                     UseShellExecute = true
                 }
@@ -141,11 +103,11 @@ namespace HexConverter
             p.Start();
         }
 
-        private void linkLabelBinaries_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabelBinaries_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo(@"https://github.com/alexkravchenkohm/HexConverter/releases")
+                StartInfo = new ProcessStartInfo(LinkDataBinaries)
                 {
                     UseShellExecute = true
                 }

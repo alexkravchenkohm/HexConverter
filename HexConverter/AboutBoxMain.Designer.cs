@@ -184,7 +184,7 @@
             this.linkLabelSource.TabIndex = 33;
             this.linkLabelSource.TabStop = true;
             this.linkLabelSource.Text = "GitHub Repository";
-            this.linkLabelSource.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSource_LinkClicked);
+            this.linkLabelSource.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelSource_LinkClicked);
             // 
             // linkLabelBinaries
             // 
@@ -196,7 +196,7 @@
             this.linkLabelBinaries.TabIndex = 34;
             this.linkLabelBinaries.TabStop = true;
             this.linkLabelBinaries.Text = "GitHub Artifacts";
-            this.linkLabelBinaries.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBinaries_LinkClicked);
+            this.linkLabelBinaries.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelBinaries_LinkClicked);
             // 
             // AboutBoxMain
             // 

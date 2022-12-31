@@ -3,6 +3,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Media;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -47,7 +48,7 @@ namespace HexConverter
                         return titleAttribute.Title;
                     }
                 }
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
+                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
             }
         }
 
@@ -73,46 +74,57 @@ namespace HexConverter
         }
         #endregion
 
-        private void LinkLabelLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (e.Link.LinkData is not string fileName)
-                return;
-            var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (directory == null)
-                return;
+            string? processStartTarget = null;
 
-            var p = new Process
+            if (sender == linkLabelLicense)
             {
-                StartInfo = new ProcessStartInfo(Path.Combine(directory, fileName))
+                if (e.Link.LinkData is string fileName)
                 {
-                    UseShellExecute = true
+                    var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    if (directory is not null)
+                    {
+                        processStartTarget = Path.Combine(directory, fileName);
+                    }
+                    else
+                    {
+                        SystemSounds.Beep.Play();
+                    }
                 }
-            };
-            p.Start();
+            }
+            else if (sender == linkLabelSource)
+            {
+                processStartTarget = LinkDataSource;
+            }
+            else if (sender == linkLabelBinaries)
+            {
+                processStartTarget = LinkDataBinaries;
+            }
+
+            OpenLink(processStartTarget);
         }
 
-        private void LinkLabelSource_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private static void OpenLink(string? target)
         {
-            var p = new Process
+            if (target is not null)
             {
-                StartInfo = new ProcessStartInfo(LinkDataSource)
+                try
                 {
-                    UseShellExecute = true
+                    var process = new Process
+                    {
+                        StartInfo = new ProcessStartInfo(Path.Combine(target))
+                        {
+                            UseShellExecute = true
+                        }
+                    };
+                    process.Start();
                 }
-            };
-            p.Start();
-        }
-
-        private void LinkLabelBinaries_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo(LinkDataBinaries)
+                catch
                 {
-                    UseShellExecute = true
+                    SystemSounds.Beep.Play();
                 }
-            };
-            p.Start();
+            }
         }
     }
 }

@@ -15,12 +15,12 @@ namespace HexConverter
         private const string LinkDataSource = @"https://github.com/alexkravchenkohm/HexConverter";
         private const string LinkDataBinaries = @"https://github.com/alexkravchenkohm/HexConverter/releases";
 
-        public AboutBoxMain()
+        public AboutBoxMain(string productName)
         {
             InitializeComponent();
-            this.Text = $"About {AssemblyTitle}";
-            this.labelVersion.Text = $"Version {AssemblyVersionMajorMinor}";
-            this.labelCopyright.Text = AssemblyCopyright;
+            Text = $"About {productName}";
+            labelVersion.Text = $"Version {AssemblyVersionMajorMinor}";
+            labelCopyright.Text = AssemblyCopyright;
         }
 
         private void AboutBoxMain_Load(object sender, EventArgs e)
@@ -34,23 +34,6 @@ namespace HexConverter
         }
 
         #region Assembly Attribute Accessors
-
-        public static string AssemblyTitle
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                if (attributes.Length > 0)
-                {
-                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
-                    {
-                        return titleAttribute.Title;
-                    }
-                }
-                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
-            }
-        }
 
         public static string? AssemblyVersionMajorMinor
         {

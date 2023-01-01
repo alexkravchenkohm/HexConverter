@@ -18,8 +18,8 @@ namespace HexConverter
         public AboutBoxMain()
         {
             InitializeComponent();
-            this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
+            this.Text = $"About {AssemblyTitle}";
+            this.labelVersion.Text = $"Version {AssemblyVersionMajorMinor}";
             this.labelCopyright.Text = AssemblyCopyright;
         }
 
@@ -52,11 +52,19 @@ namespace HexConverter
             }
         }
 
-        public static string? AssemblyVersion
+        public static string? AssemblyVersionMajorMinor
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+                var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+                if (string.IsNullOrEmpty(version))
+                    return null;
+                // Remove two last components from the version string
+                var tokens = version.Split(new char[] { '.' });
+                if (tokens.Length < 2)
+                    return version;
+
+                return $"{tokens[0]}.{tokens[1]}";
             }
         }
 

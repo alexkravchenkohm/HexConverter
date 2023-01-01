@@ -1,24 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationIcon>IconMain.ico</ApplicationIcon>
-    <Title>Hex Converter</Title>
-    <Authors>Alex Kravchenko and contributors</Authors>
-    <Copyright>Alex Kravchenko and contributors</Copyright>
-	<Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<AssemblyVersion>1.0.*</AssemblyVersion>
+		<Deterministic>false</Deterministic>
+		<ApplicationIcon>IconMain.ico</ApplicationIcon>
+		<Title>AK Hex Converter</Title>
+		<Authors>Alex Kravchenko and contributors</Authors>
+		<Copyright>Alex Kravchenko and contributors</Copyright>
+		<Nullable>enable</Nullable>
+		<AssemblyName>AK Hex Converter</AssemblyName>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="IconMain.ico" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="IconMain.ico" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\LICENSE" Link="LICENSE">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+		<None Include="..\LICENSE.txt" Link="LICENSE.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

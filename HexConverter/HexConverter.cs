@@ -1,10 +1,8 @@
 ﻿// Copyright (c) 2022 Alex Kravchenko
 
 using System;
-using System.Buffers.Binary;
 using System.Globalization;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace HexConverter
 {
@@ -113,23 +111,39 @@ namespace HexConverter
                     }
                     break;
                 case Format.ASCII:
-                    {
-                        // For now just expecting up to 8-byte strings interpreted as big-endian ASCII characters.
-                        // TODO: add support for free-form coma-separated lists.
-                        if (ulong.TryParse(hex, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var val))
-                        {
-                            var bytes = BitConverter.GetBytes(BinaryPrimitives.ReverseEndianness(val));
-                            var text = Encoding.UTF8.GetString(bytes); 
-                            text = text.TrimStart('\0');
-                            return Regex.Replace(text, @"[^\u001F-\u007F]", "\u001a");  // Non printable are substituted with 0x1a "SUB"
-                        }
-                    }
-                    break;
+                    return GetAscii(hex);
                 default:
                     break;
             }
 
             return null;
+        }
+
+        private static string? GetAscii(string hex)
+        {
+            var tokens = hex.Split(new char[] { '-', ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            var sb = new StringBuilder();
+            foreach (var item in tokens)
+            {
+                // add "0" char to the front of each token if length is odd
+                var token = (item.Length % 2 == 0) ? item : "0" + item;
+                // link the tokens back
+                sb.Append(token);
+            }
+            var normalized = sb.ToString();
+
+            var bytes = new byte[normalized.Length / 2];
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                if (!byte.TryParse(normalized.AsSpan(i * 2, 2), NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var bval))
+                {
+                    return null;
+                }
+                bytes[i] = bval;
+            }
+
+            return Encoding.ASCII.GetString(bytes);
         }
 
         public static string? ConvertFromDec(string text, string formatName)
@@ -212,21 +226,8 @@ namespace HexConverter
                     }
                     break;
                 case Format.ASCII:
-                    var bytes = Encoding.UTF8.GetBytes(text);
-                    if (bytes.Length > 0 && Array.IndexOf(bytes, 0x1a) < 0)   // reject values containing the substitute character 
-                    {
-                        // This code trims the string to 8 bytes. An alternative approach is rejecting it.
-                        var eightBytes = new byte[8];
-                        for (int i = 0; i < bytes.Length && i < eightBytes.Length; i++)
-                        {
-                            // Only taking eight bytes from the tail
-                            eightBytes[eightBytes.Length - 1 - i] = bytes[bytes.Length - 1 - i];
-                        }
-                        var ul = BitConverter.ToUInt64(eightBytes, 0);
-                        ul = BinaryPrimitives.ReverseEndianness(ul);
-                        return ul.ToString("x");
-                    }
-                    break;
+                    var bytes = Encoding.ASCII.GetBytes(text);
+                    return BitConverter.ToString(bytes).Replace("-", string.Empty);
                 default:
                     break;
             }

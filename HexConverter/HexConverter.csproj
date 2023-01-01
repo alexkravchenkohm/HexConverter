@@ -4,7 +4,7 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
-		<AssemblyVersion>1.0.*</AssemblyVersion>
+		<AssemblyVersion>1.1.*</AssemblyVersion>
 		<Deterministic>false</Deterministic>
 		<ApplicationIcon>IconMain.ico</ApplicationIcon>
 		<Title>AK Hex Converter</Title>

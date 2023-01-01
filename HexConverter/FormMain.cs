@@ -359,7 +359,7 @@ namespace HexConverter
 
         private void HelpToolStripButton_Click(object sender, EventArgs e)
         {
-            _ = new AboutBoxMain().ShowDialog();
+            _ = new AboutBoxMain(Text).ShowDialog();
         }
     }
 }

@@ -81,7 +81,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 23);
             this.label5.TabIndex = 31;
-            this.label5.Text = "Binaries";
+            this.label5.Text = "Releases";
             // 
             // label4
             // 

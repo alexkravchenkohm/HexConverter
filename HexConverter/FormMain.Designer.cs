@@ -200,7 +200,7 @@ namespace HexConverter
             this.formatDecToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.formatDecToolStripButton.Name = "formatDecToolStripButton";
             this.formatDecToolStripButton.Size = new System.Drawing.Size(86, 22);
-            this.formatDecToolStripButton.Text = "Show &Formats";
+            this.formatDecToolStripButton.Text = "&Format";
             this.formatDecToolStripButton.Click += new System.EventHandler(this.FormatDecToolStripButton_Click);
             // 
             // toolStripSeparator

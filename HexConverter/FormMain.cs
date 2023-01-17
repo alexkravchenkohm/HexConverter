@@ -31,6 +31,7 @@ namespace HexConverter
             if (_state == null)
             {
                 _state = new PersistedState();
+                HideFormatsDec();
                 return;
             }
 

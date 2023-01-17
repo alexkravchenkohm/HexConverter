@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Alex Kravchenko
+﻿// Copyright (c) 2022 - 2023 Alex Kravchenko
 
 using System;
 using System.Diagnostics;
@@ -66,6 +66,14 @@ namespace HexConverter
             textBoxDec2.Tag = _state.IsDirtyDec2;
 
             formatDecToolStripButton.Checked = _state.ShowFormatDecChecked;
+            if (formatDecToolStripButton.Checked)
+            {
+                ShowFormatsDec();
+            }
+            else
+            {
+                HideFormatsDec();
+            }
         }
 
         private void SaveState()
@@ -300,9 +308,11 @@ namespace HexConverter
         {
             Width = WidthCompact;
             panelFormatsDec.Hide();
-            labelDec.Text = "Decimal as UINT64";
+            labelDec.Text = "UINT64";
             comboBoxFormatDec1.SelectedItem = "UINT64";
             comboBoxFormatDec2.SelectedItem = "UINT64";
+            // TODO: consider the right-pane icon instead of the text
+            formatDecToolStripButton.Text = "Show &Format";
         }
 
         private void ShowFormatsDec()
@@ -310,6 +320,7 @@ namespace HexConverter
             Width = WidthExtended;
             panelFormatsDec.Show();
             labelDec.Text = "Converted";
+            formatDecToolStripButton.Text = "Hide &Format";
         }
 
         private void ComboBoxFormatDecChanged(object sender, EventArgs e)

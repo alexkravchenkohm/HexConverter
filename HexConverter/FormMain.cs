@@ -10,9 +10,6 @@ namespace HexConverter
 {
     public partial class FormMain : Form
     {
-        private const int WidthExtended = 517;
-        private const int WidthCompact = 422;
-
         private PersistedState? _state;
 
         public FormMain()
@@ -50,7 +47,6 @@ namespace HexConverter
             else
             {
                 Location = _state.Location;
-                //Size = _state.Size;
             }
 
             textBoxHex1.Text = _state.Hex1;
@@ -158,12 +154,10 @@ namespace HexConverter
         {
             if (formatDecToolStripButton.Checked)
             {
-                Width = WidthExtended;
                 panelFormatsDec.Show();
             }
             else
             {
-                Width = WidthCompact;
                 panelFormatsDec.Hide();
             }
         }
@@ -307,18 +301,19 @@ namespace HexConverter
 
         private void HideFormatsDec()
         {
-            Width = WidthCompact;
             panelFormatsDec.Hide();
             labelDec.Text = "UINT64";
             comboBoxFormatDec1.SelectedItem = "UINT64";
             comboBoxFormatDec2.SelectedItem = "UINT64";
             // TODO: consider the right-pane icon instead of the text
             formatDecToolStripButton.Text = "Show &Format";
+            // This allows the FormMain with AutoSize=true to deal with custom DPI display settings.
+            // It relies on the Margin constraints of the controls.
+            Width = 0;
         }
 
         private void ShowFormatsDec()
         {
-            Width = WidthExtended;
             panelFormatsDec.Show();
             labelDec.Text = "Converted";
             formatDecToolStripButton.Text = "Hide &Format";

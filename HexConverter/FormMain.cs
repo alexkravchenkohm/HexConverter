@@ -306,7 +306,7 @@ namespace HexConverter
             comboBoxFormatDec1.SelectedItem = "UINT64";
             comboBoxFormatDec2.SelectedItem = "UINT64";
             // TODO: consider the right-pane icon instead of the text
-            formatDecToolStripButton.Text = "Show &Format";
+            formatDecToolStripButton.Text = "&Format Options";
             // This allows the FormMain with AutoSize=true to deal with custom DPI display settings.
             // It relies on the Margin constraints of the controls.
             Width = 0;
@@ -316,7 +316,7 @@ namespace HexConverter
         {
             panelFormatsDec.Show();
             labelDec.Text = "Converted";
-            formatDecToolStripButton.Text = "Hide &Format";
+            formatDecToolStripButton.Text = "&Format Options";
         }
 
         private void ComboBoxFormatDecChanged(object sender, EventArgs e)

@@ -32,13 +32,13 @@ namespace HexConverter
                 return;
             }
 
-            if (_state.Maximised)
+            if (_state.Maximized)
             {
                 Location = _state.Location;
                 WindowState = FormWindowState.Maximized;
                 Size = _state.Size;
             }
-            else if (_state.Minimised)
+            else if (_state.Minimized)
             {
                 Location = _state.Location;
                 WindowState = FormWindowState.Minimized;
@@ -81,22 +81,22 @@ namespace HexConverter
             {
                 _state.Location = RestoreBounds.Location;
                 _state.Size = RestoreBounds.Size;
-                _state.Maximised = true;
-                _state.Minimised = false;
+                _state.Maximized = true;
+                _state.Minimized = false;
             }
             else if (WindowState == FormWindowState.Normal)
             {
                 _state.Location = Location;
                 _state.Size = Size;
-                _state.Maximised = false;
-                _state.Minimised = false;
+                _state.Maximized = false;
+                _state.Minimized = false;
             }
             else
             {
                 _state.Location = RestoreBounds.Location;
                 _state.Size = RestoreBounds.Size;
-                _state.Maximised = false;
-                _state.Minimised = true;
+                _state.Maximized = false;
+                _state.Minimized = true;
             }
 
             _state.Hex1 = textBoxHex1.Text;

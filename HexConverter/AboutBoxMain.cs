@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Alex Kravchenko
+﻿// Copyright (c) 2022 - 2023 Alex Kravchenko
 
 using System;
 using System.Diagnostics;
@@ -19,7 +19,7 @@ namespace HexConverter
         {
             InitializeComponent();
             Text = $"About {productName}";
-            labelVersion.Text = $"Version {AssemblyVersionMajorMinor}";
+            labelVersion.Text = AssemblyVersionMajorMinor;
             labelCopyright.Text = AssemblyCopyright;
         }
 
@@ -73,7 +73,7 @@ namespace HexConverter
             {
                 if (e.Link.LinkData is string fileName)
                 {
-                    var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var directory = AppContext.BaseDirectory;
                     if (directory is not null)
                     {
                         processStartTarget = Path.Combine(directory, fileName);

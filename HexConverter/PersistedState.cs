@@ -1,8 +1,8 @@
-﻿// Copyright (c) 2022 Alex Kravchenko
+﻿// Copyright (c) 2022 - 2023 Alex Kravchenko
 
+using System;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Text.Json;
 
 namespace HexConverter
@@ -11,8 +11,8 @@ namespace HexConverter
     {
         public Point Location { get; set; }
         public Size Size { get; set; }
-        public bool Maximised { get; set; }
-        public bool Minimised { get; set; }
+        public bool Maximized { get; set; }
+        public bool Minimized { get; set; }
 
         public string Hex1 { get; set; } = string.Empty;
         public string Hex2 { get; set; } = string.Empty;
@@ -31,7 +31,7 @@ namespace HexConverter
 
         private static string GetFileName()
         {
-            var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var directory = AppContext.BaseDirectory;
             var filename = "state.json";
             return directory == null ? filename : Path.Combine(directory, filename);
         }

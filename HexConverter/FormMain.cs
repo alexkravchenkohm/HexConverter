@@ -119,7 +119,8 @@ namespace HexConverter
 
         private void FormMain_Activated(object sender, EventArgs e)
         {
-            buttonHex1.Focus();
+            textBoxHex1.Focus();
+            textBoxHex1.Select(textBoxHex1.Text.Length, 0);
         }
 
         private void InitializeDirtyFlags()

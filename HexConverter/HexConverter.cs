@@ -18,8 +18,8 @@ namespace HexConverter
             INT32,
             INT16,
             INT8,
-            FLOAT32,
             FLOAT64,
+            FLOAT32,
             ASCII,
         }
 
@@ -112,22 +112,22 @@ namespace HexConverter
                         }
                     }
                     break;
-                case Format.FLOAT32:
-                    {
-                        if (uint.TryParse(hex, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var uintVal))
-                        {
-                            var bytes = BitConverter.GetBytes(uintVal);
-                            var val = BitConverter.ToSingle(bytes.AsSpan());
-                            return val.ToString(CultureInfo.CurrentCulture);
-                        }
-                    }
-                    break;
                 case Format.FLOAT64:
                     {
                         if (ulong.TryParse(hex, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var uintVal))
                         {
                             var bytes = BitConverter.GetBytes(uintVal);
                             var val = BitConverter.ToDouble(bytes.AsSpan());
+                            return val.ToString(CultureInfo.CurrentCulture);
+                        }
+                    }
+                    break;
+                case Format.FLOAT32:
+                    {
+                        if (uint.TryParse(hex, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out var uintVal))
+                        {
+                            var bytes = BitConverter.GetBytes(uintVal);
+                            var val = BitConverter.ToSingle(bytes.AsSpan());
                             return val.ToString(CultureInfo.CurrentCulture);
                         }
                     }
@@ -247,22 +247,22 @@ namespace HexConverter
                         }
                     }
                     break;
-                case Format.FLOAT32:
-                    {
-                        if (float.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out var floatVal))
-                        {
-                            var bytes = BitConverter.GetBytes(floatVal);
-                            var val = BitConverter.ToUInt32(bytes.AsSpan());
-                            return val.ToString("x");
-                        }
-                    }
-                    break;
                 case Format.FLOAT64:
                     {
                         if (double.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out var floatVal))
                         {
                             var bytes = BitConverter.GetBytes(floatVal);
                             var val = BitConverter.ToUInt64(bytes.AsSpan());
+                            return val.ToString("x");
+                        }
+                    }
+                    break;
+                case Format.FLOAT32:
+                    {
+                        if (float.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out var floatVal))
+                        {
+                            var bytes = BitConverter.GetBytes(floatVal);
+                            var val = BitConverter.ToUInt32(bytes.AsSpan());
                             return val.ToString("x");
                         }
                     }

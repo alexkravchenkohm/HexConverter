@@ -51,6 +51,7 @@ namespace HexConverter
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.panelFormatsDec = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.panelFormatsDec.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +70,7 @@ namespace HexConverter
             // textBoxDec1
             // 
             this.textBoxDec1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxDec1.Location = new System.Drawing.Point(255, 74);
+            this.textBoxDec1.Location = new System.Drawing.Point(256, 74);
             this.textBoxDec1.Margin = new System.Windows.Forms.Padding(3, 3, 19, 3);
             this.textBoxDec1.Name = "textBoxDec1";
             this.textBoxDec1.Size = new System.Drawing.Size(107, 22);
@@ -148,7 +149,7 @@ namespace HexConverter
             // textBoxDec2
             // 
             this.textBoxDec2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxDec2.Location = new System.Drawing.Point(255, 116);
+            this.textBoxDec2.Location = new System.Drawing.Point(256, 116);
             this.textBoxDec2.Margin = new System.Windows.Forms.Padding(3, 3, 19, 3);
             this.textBoxDec2.Name = "textBoxDec2";
             this.textBoxDec2.Size = new System.Drawing.Size(107, 22);
@@ -173,7 +174,7 @@ namespace HexConverter
             this.comboBoxFormatDec1.Location = new System.Drawing.Point(13, 74);
             this.comboBoxFormatDec1.Margin = new System.Windows.Forms.Padding(2, 3, 0, 3);
             this.comboBoxFormatDec1.Name = "comboBoxFormatDec1";
-            this.comboBoxFormatDec1.Size = new System.Drawing.Size(62, 23);
+            this.comboBoxFormatDec1.Size = new System.Drawing.Size(72, 23);
             this.comboBoxFormatDec1.TabIndex = 10;
             this.comboBoxFormatDec1.TabStop = false;
             this.comboBoxFormatDec1.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFormatDecChanged);
@@ -184,7 +185,7 @@ namespace HexConverter
             this.comboBoxFormatDec2.Location = new System.Drawing.Point(13, 116);
             this.comboBoxFormatDec2.Margin = new System.Windows.Forms.Padding(2, 3, 0, 3);
             this.comboBoxFormatDec2.Name = "comboBoxFormatDec2";
-            this.comboBoxFormatDec2.Size = new System.Drawing.Size(62, 23);
+            this.comboBoxFormatDec2.Size = new System.Drawing.Size(72, 23);
             this.comboBoxFormatDec2.TabIndex = 11;
             this.comboBoxFormatDec2.TabStop = false;
             this.comboBoxFormatDec2.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFormatDecChanged);
@@ -201,7 +202,7 @@ namespace HexConverter
             this.helpToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(462, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(480, 27);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -258,20 +259,31 @@ namespace HexConverter
             // 
             // panelFormatsDec
             // 
+            this.panelFormatsDec.Controls.Add(this.label2);
             this.panelFormatsDec.Controls.Add(this.comboBoxFormatDec1);
             this.panelFormatsDec.Controls.Add(this.comboBoxFormatDec2);
             this.panelFormatsDec.Location = new System.Drawing.Point(371, 0);
             this.panelFormatsDec.Margin = new System.Windows.Forms.Padding(2, 3, 0, 3);
             this.panelFormatsDec.Name = "panelFormatsDec";
-            this.panelFormatsDec.Size = new System.Drawing.Size(90, 166);
+            this.panelFormatsDec.Size = new System.Drawing.Size(109, 166);
             this.panelFormatsDec.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 42);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 15);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Format";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(462, 166);
+            this.ClientSize = new System.Drawing.Size(480, 166);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.buttonDec2);
             this.Controls.Add(this.buttonHex2);
@@ -298,6 +310,7 @@ namespace HexConverter
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panelFormatsDec.ResumeLayout(false);
+            this.panelFormatsDec.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,6 +338,7 @@ namespace HexConverter
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.Panel panelFormatsDec;
+        private System.Windows.Forms.Label label2;
     }
 }
 

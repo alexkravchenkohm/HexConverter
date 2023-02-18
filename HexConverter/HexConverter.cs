@@ -2,6 +2,7 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace HexConverter
@@ -23,6 +24,7 @@ namespace HexConverter
             ASCII,
         }
 
+        private static readonly char[] AciiByteSeparators = new char[] { '-', ' ', ',' };
         internal static string[] FormatStrings => Enum.GetNames(typeof(Format));
 
         public static string? ConvertFromHex(string hex, string formatName)
@@ -143,7 +145,9 @@ namespace HexConverter
 
         private static string? GetAscii(string hex)
         {
-            var tokens = hex.Split(new char[] { '-', ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var tokens = hex.Split(
+                AciiByteSeparators, 
+                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
             var sb = new StringBuilder();
             foreach (var item in tokens)
@@ -277,6 +281,54 @@ namespace HexConverter
             }
 
             return null;
+        }
+
+        private static bool IsFormatFloating(string formatName)
+        {
+            return Enum.TryParse(formatName, out Format format)
+                && (format == Format.FLOAT64 || format == Format.FLOAT32);
+        }
+
+        private static bool IsFormatAscii(string formatName)
+        {
+            return Enum.TryParse(formatName, out Format format) && format == Format.ASCII;
+        }
+
+        internal static bool IsValidHexCharacter(char ch, string formatName)
+        {
+            if (IsFormatAscii(formatName) && AciiByteSeparators.Contains(ch))
+            {
+                // Allowing byte separators when converting to ASCII
+                return true;
+            }
+            if (char.IsDigit(ch))
+            {
+                return true;
+            }
+            return char.ToUpperInvariant(ch) switch
+            {
+                'X' or 'H' or 'A' or 'B' or 'C' or 'D' or 'E' or 'F' => true,
+                _ => false,
+            };
+        }
+
+        internal static bool IsValidDecCharacter(char ch, string formatName)
+        {
+            if (IsFormatAscii(formatName))
+            {
+                // Allowing any character to be entered when converting from ASCII
+                return true;
+            }
+            if (IsFormatFloating(formatName) && ch == '.' || ch == 'e' || ch == 'E')
+            {
+                return true;
+            }
+            if (char.IsNumber(ch) || ch == '+' || ch == '-')
+            {
+                return true;
+            }
+            
+            return false;
         }
     }
 }

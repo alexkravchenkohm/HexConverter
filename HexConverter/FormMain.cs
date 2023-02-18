@@ -207,15 +207,48 @@ namespace HexConverter
 
         private void TextBoxKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && sender is Control control)
+            if (e.KeyCode == Keys.Enter && sender is TextBox textBox)
             {
-                var converted = Convert(control.Name);
+                var converted = Convert(textBox.Name);
                 e.Handled = true;
                 if (converted)
                 {
                     e.SuppressKeyPress = true;
                 }
             }
+        }
+
+        private void TextBoxKeyPressed(object sender, KeyPressEventArgs e)
+        {
+            if (sender is not TextBox textBox)
+            {
+                return;
+            }
+
+            if (!IsValidCharacter(e.KeyChar, textBox.Name))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private bool IsValidCharacter(char ch, string textBoxName)
+        {
+            if (char.IsControl(ch))
+            {
+                return true;
+            }
+
+            var suffix = GetControlNameSuffix(textBoxName);
+            var valid = suffix switch
+            {
+                "Hex1" => HexConverter.IsValidHexCharacter(ch, comboBoxFormatDec1.Text),
+                "Dec1" => HexConverter.IsValidDecCharacter(ch, comboBoxFormatDec1.Text),
+                "Hex2" => HexConverter.IsValidHexCharacter(ch, comboBoxFormatDec2.Text),
+                "Dec2" => HexConverter.IsValidDecCharacter(ch, comboBoxFormatDec2.Text),
+                _ => false,
+            };
+
+            return valid;
         }
 
         private void ButtonClick(object sender, EventArgs e)
@@ -229,11 +262,15 @@ namespace HexConverter
             }
         }
 
+        private static string GetControlNameSuffix(string name)
+        {
+            Debug.Assert(name.Length >= 4);
+            return name.Substring(name.Length - 4, 4);
+        }
+
         private bool Convert(string controlName)
         {
-            Debug.Assert(controlName.Length >= 4);
-
-            string suffix = controlName.Substring(controlName.Length - 4, 4);
+            var suffix = GetControlNameSuffix(controlName);
             var converted = suffix switch
             {
                 "Hex1" => ConvertFromHex(textBoxHex1, textBoxDec1, comboBoxFormatDec1),

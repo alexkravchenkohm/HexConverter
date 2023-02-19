@@ -149,6 +149,20 @@ namespace HexConverter
             RefreshDirtyStates();
 
             RefreshFormatControls();
+
+            RefreshConvertButtons();
+        }
+
+        private void RefreshConvertButtons()
+        {
+            if (buttonConvert1.Text == ActionToNothing)
+            {
+                buttonConvert1.Enabled = false;
+            }
+            if (buttonConvert2.Text == ActionToNothing)
+            {
+                buttonConvert2.Enabled = false;
+            }
         }
 
         private void RefreshFormatControls()
@@ -335,6 +349,9 @@ namespace HexConverter
             SetDirty(textBoxHex2, true);
             SetDirty(textBoxDec1, true);
             SetDirty(textBoxDec2, true);
+
+            ActivateConvertButton(buttonConvert1, ActionToNothing);
+            ActivateConvertButton(buttonConvert2, ActionToNothing);
         }
 
         private void HideFormatsDec()
@@ -405,6 +422,66 @@ namespace HexConverter
         private void HelpToolStripButton_Click(object sender, EventArgs e)
         {
             _ = new AboutBoxMain(Text).ShowDialog();
+        }
+
+        private const string ActionToDec = "->";
+        private const string ActionToHex = "<-";
+        private const string ActionToNothing = "-";
+
+        private void TextBoxEnter(object sender, EventArgs e)
+        {
+            if (sender is TextBox tb)
+            {
+                bool thisWasDirty = (bool)tb.Tag;
+                if (thisWasDirty)
+                {
+                    if (tb == textBoxHex1) { SetDirty(textBoxDec1, true); }
+                    else if (tb == textBoxHex2) { SetDirty(textBoxDec2, true); }
+                    else if (tb == textBoxDec1) { SetDirty(textBoxHex1, true); }
+                    else if (tb == textBoxDec2) { SetDirty(textBoxHex2, true); }
+                }
+                SetDirty(tb, false);
+
+                if (tb == textBoxHex1)      { ActivateConvertButton(buttonConvert1, ActionToDec); }
+                else if (tb == textBoxHex2) { ActivateConvertButton(buttonConvert2, ActionToDec); }
+                else if (tb == textBoxDec1) { ActivateConvertButton(buttonConvert1, ActionToHex); }
+                else if (tb == textBoxDec2) { ActivateConvertButton(buttonConvert2, ActionToHex); }
+            }
+        }
+
+        private static void ActivateConvertButton(Button button, string action)
+        {
+            button.Text = action;
+            button.Enabled = action != ActionToNothing;
+        }
+
+        private void ButtonConvert1_Click(object sender, EventArgs e)
+        {
+            Convert(sender, 1);
+        }
+
+        private void ButtonConvert2_Click(object sender, EventArgs e)
+        {
+            Convert(sender, 2);
+        }
+
+        private void Convert(object sender, int rowNumber)
+        {
+            if (sender is not Button button)
+                return;
+
+            if (button.Text == ActionToDec)
+            {
+                Convert("Hex" + rowNumber);
+            }
+            else if (button.Text == ActionToHex)
+            {
+                Convert("Dec" + rowNumber);
+            }
+            else
+            {
+                SystemSounds.Beep.Play();
+            }
         }
     }
 }

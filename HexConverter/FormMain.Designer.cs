@@ -52,6 +52,8 @@ namespace HexConverter
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.panelFormatsDec = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.buttonConvert1 = new System.Windows.Forms.Button();
+            this.buttonConvert2 = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.panelFormatsDec.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +67,7 @@ namespace HexConverter
             this.textBoxHex1.Size = new System.Drawing.Size(214, 36);
             this.textBoxHex1.TabIndex = 0;
             this.textBoxHex1.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
+            this.textBoxHex1.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxHex1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             this.textBoxHex1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxKeyPressed);
             // 
@@ -77,6 +80,7 @@ namespace HexConverter
             this.textBoxDec1.Size = new System.Drawing.Size(195, 36);
             this.textBoxDec1.TabIndex = 1;
             this.textBoxDec1.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
+            this.textBoxDec1.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxDec1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             this.textBoxDec1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxKeyPressed);
             // 
@@ -157,6 +161,7 @@ namespace HexConverter
             this.textBoxDec2.Size = new System.Drawing.Size(195, 36);
             this.textBoxDec2.TabIndex = 7;
             this.textBoxDec2.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
+            this.textBoxDec2.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxDec2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             this.textBoxDec2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxKeyPressed);
             // 
@@ -169,6 +174,7 @@ namespace HexConverter
             this.textBoxHex2.Size = new System.Drawing.Size(214, 36);
             this.textBoxHex2.TabIndex = 6;
             this.textBoxHex2.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
+            this.textBoxHex2.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxHex2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             this.textBoxHex2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxKeyPressed);
             // 
@@ -283,12 +289,34 @@ namespace HexConverter
             this.label2.TabIndex = 14;
             this.label2.Text = "Format";
             // 
+            // buttonConvert1
+            // 
+            this.buttonConvert1.Location = new System.Drawing.Point(325, 90);
+            this.buttonConvert1.Name = "buttonConvert1";
+            this.buttonConvert1.Size = new System.Drawing.Size(78, 46);
+            this.buttonConvert1.TabIndex = 14;
+            this.buttonConvert1.Text = "-";
+            this.buttonConvert1.UseVisualStyleBackColor = true;
+            this.buttonConvert1.Click += new System.EventHandler(this.ButtonConvert1_Click);
+            // 
+            // buttonConvert2
+            // 
+            this.buttonConvert2.Location = new System.Drawing.Point(334, 308);
+            this.buttonConvert2.Name = "buttonConvert2";
+            this.buttonConvert2.Size = new System.Drawing.Size(78, 46);
+            this.buttonConvert2.TabIndex = 15;
+            this.buttonConvert2.Text = "-";
+            this.buttonConvert2.UseVisualStyleBackColor = true;
+            this.buttonConvert2.Click += new System.EventHandler(this.ButtonConvert2_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(891, 354);
+            this.Controls.Add(this.buttonConvert2);
+            this.Controls.Add(this.buttonConvert1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.buttonDec2);
             this.Controls.Add(this.buttonHex2);
@@ -344,6 +372,8 @@ namespace HexConverter
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.Panel panelFormatsDec;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonConvert1;
+        private System.Windows.Forms.Button buttonConvert2;
     }
 }
 

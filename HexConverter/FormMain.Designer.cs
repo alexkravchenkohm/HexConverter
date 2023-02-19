@@ -33,12 +33,8 @@ namespace HexConverter
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.textBoxHex1 = new System.Windows.Forms.TextBox();
             this.textBoxDec1 = new System.Windows.Forms.TextBox();
-            this.buttonHex1 = new System.Windows.Forms.Button();
-            this.buttonDec1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelDec = new System.Windows.Forms.Label();
-            this.buttonDec2 = new System.Windows.Forms.Button();
-            this.buttonHex2 = new System.Windows.Forms.Button();
             this.textBoxDec2 = new System.Windows.Forms.TextBox();
             this.textBoxHex2 = new System.Windows.Forms.TextBox();
             this.comboBoxFormatDec1 = new System.Windows.Forms.ComboBox();
@@ -66,6 +62,7 @@ namespace HexConverter
             this.textBoxHex1.Name = "textBoxHex1";
             this.textBoxHex1.Size = new System.Drawing.Size(214, 36);
             this.textBoxHex1.TabIndex = 0;
+            this.textBoxHex1.Click += new System.EventHandler(this.TextBoxClick);
             this.textBoxHex1.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             this.textBoxHex1.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxHex1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
@@ -74,39 +71,16 @@ namespace HexConverter
             // textBoxDec1
             // 
             this.textBoxDec1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxDec1.Location = new System.Drawing.Point(475, 158);
+            this.textBoxDec1.Location = new System.Drawing.Point(383, 158);
             this.textBoxDec1.Margin = new System.Windows.Forms.Padding(6, 6, 35, 6);
             this.textBoxDec1.Name = "textBoxDec1";
-            this.textBoxDec1.Size = new System.Drawing.Size(195, 36);
+            this.textBoxDec1.Size = new System.Drawing.Size(209, 36);
             this.textBoxDec1.TabIndex = 1;
+            this.textBoxDec1.Click += new System.EventHandler(this.TextBoxClick);
             this.textBoxDec1.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             this.textBoxDec1.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxDec1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             this.textBoxDec1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxKeyPressed);
-            // 
-            // buttonHex1
-            // 
-            this.buttonHex1.Location = new System.Drawing.Point(273, 156);
-            this.buttonHex1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.buttonHex1.Name = "buttonHex1";
-            this.buttonHex1.Size = new System.Drawing.Size(78, 53);
-            this.buttonHex1.TabIndex = 2;
-            this.buttonHex1.TabStop = false;
-            this.buttonHex1.Text = "->";
-            this.buttonHex1.UseVisualStyleBackColor = true;
-            this.buttonHex1.Click += new System.EventHandler(this.ButtonClick);
-            // 
-            // buttonDec1
-            // 
-            this.buttonDec1.Location = new System.Drawing.Point(379, 156);
-            this.buttonDec1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.buttonDec1.Name = "buttonDec1";
-            this.buttonDec1.Size = new System.Drawing.Size(78, 53);
-            this.buttonDec1.TabIndex = 3;
-            this.buttonDec1.TabStop = false;
-            this.buttonDec1.Text = "<-";
-            this.buttonDec1.UseVisualStyleBackColor = true;
-            this.buttonDec1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // label1
             // 
@@ -121,45 +95,22 @@ namespace HexConverter
             // labelDec
             // 
             this.labelDec.AutoSize = true;
-            this.labelDec.Location = new System.Drawing.Point(468, 90);
+            this.labelDec.Location = new System.Drawing.Point(385, 90);
             this.labelDec.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDec.Name = "labelDec";
             this.labelDec.Size = new System.Drawing.Size(125, 32);
             this.labelDec.TabIndex = 5;
             this.labelDec.Text = "Converted";
             // 
-            // buttonDec2
-            // 
-            this.buttonDec2.Location = new System.Drawing.Point(379, 245);
-            this.buttonDec2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.buttonDec2.Name = "buttonDec2";
-            this.buttonDec2.Size = new System.Drawing.Size(78, 53);
-            this.buttonDec2.TabIndex = 9;
-            this.buttonDec2.TabStop = false;
-            this.buttonDec2.Text = "<-";
-            this.buttonDec2.UseVisualStyleBackColor = true;
-            this.buttonDec2.Click += new System.EventHandler(this.ButtonClick);
-            // 
-            // buttonHex2
-            // 
-            this.buttonHex2.Location = new System.Drawing.Point(273, 245);
-            this.buttonHex2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.buttonHex2.Name = "buttonHex2";
-            this.buttonHex2.Size = new System.Drawing.Size(78, 53);
-            this.buttonHex2.TabIndex = 8;
-            this.buttonHex2.TabStop = false;
-            this.buttonHex2.Text = "->";
-            this.buttonHex2.UseVisualStyleBackColor = true;
-            this.buttonHex2.Click += new System.EventHandler(this.ButtonClick);
-            // 
             // textBoxDec2
             // 
             this.textBoxDec2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxDec2.Location = new System.Drawing.Point(475, 247);
+            this.textBoxDec2.Location = new System.Drawing.Point(383, 247);
             this.textBoxDec2.Margin = new System.Windows.Forms.Padding(6, 6, 35, 6);
             this.textBoxDec2.Name = "textBoxDec2";
-            this.textBoxDec2.Size = new System.Drawing.Size(195, 36);
+            this.textBoxDec2.Size = new System.Drawing.Size(209, 36);
             this.textBoxDec2.TabIndex = 7;
+            this.textBoxDec2.Click += new System.EventHandler(this.TextBoxClick);
             this.textBoxDec2.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             this.textBoxDec2.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxDec2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
@@ -173,6 +124,7 @@ namespace HexConverter
             this.textBoxHex2.Name = "textBoxHex2";
             this.textBoxHex2.Size = new System.Drawing.Size(214, 36);
             this.textBoxHex2.TabIndex = 6;
+            this.textBoxHex2.Click += new System.EventHandler(this.TextBoxClick);
             this.textBoxHex2.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             this.textBoxHex2.Enter += new System.EventHandler(this.TextBoxEnter);
             this.textBoxHex2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
@@ -181,7 +133,7 @@ namespace HexConverter
             // comboBoxFormatDec1
             // 
             this.comboBoxFormatDec1.FormattingEnabled = true;
-            this.comboBoxFormatDec1.Location = new System.Drawing.Point(24, 158);
+            this.comboBoxFormatDec1.Location = new System.Drawing.Point(24, 156);
             this.comboBoxFormatDec1.Margin = new System.Windows.Forms.Padding(4, 6, 0, 6);
             this.comboBoxFormatDec1.Name = "comboBoxFormatDec1";
             this.comboBoxFormatDec1.Size = new System.Drawing.Size(130, 40);
@@ -192,7 +144,7 @@ namespace HexConverter
             // comboBoxFormatDec2
             // 
             this.comboBoxFormatDec2.FormattingEnabled = true;
-            this.comboBoxFormatDec2.Location = new System.Drawing.Point(24, 247);
+            this.comboBoxFormatDec2.Location = new System.Drawing.Point(24, 245);
             this.comboBoxFormatDec2.Margin = new System.Windows.Forms.Padding(4, 6, 0, 6);
             this.comboBoxFormatDec2.Name = "comboBoxFormatDec2";
             this.comboBoxFormatDec2.Size = new System.Drawing.Size(130, 40);
@@ -213,7 +165,7 @@ namespace HexConverter
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(891, 42);
+            this.toolStrip1.Size = new System.Drawing.Size(821, 42);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -273,7 +225,7 @@ namespace HexConverter
             this.panelFormatsDec.Controls.Add(this.label2);
             this.panelFormatsDec.Controls.Add(this.comboBoxFormatDec1);
             this.panelFormatsDec.Controls.Add(this.comboBoxFormatDec2);
-            this.panelFormatsDec.Location = new System.Drawing.Point(689, 0);
+            this.panelFormatsDec.Location = new System.Drawing.Point(623, 0);
             this.panelFormatsDec.Margin = new System.Windows.Forms.Padding(4, 6, 0, 6);
             this.panelFormatsDec.Name = "panelFormatsDec";
             this.panelFormatsDec.Size = new System.Drawing.Size(202, 354);
@@ -291,20 +243,22 @@ namespace HexConverter
             // 
             // buttonConvert1
             // 
-            this.buttonConvert1.Location = new System.Drawing.Point(325, 90);
+            this.buttonConvert1.Location = new System.Drawing.Point(277, 154);
             this.buttonConvert1.Name = "buttonConvert1";
             this.buttonConvert1.Size = new System.Drawing.Size(78, 46);
             this.buttonConvert1.TabIndex = 14;
+            this.buttonConvert1.TabStop = false;
             this.buttonConvert1.Text = "-";
             this.buttonConvert1.UseVisualStyleBackColor = true;
             this.buttonConvert1.Click += new System.EventHandler(this.ButtonConvert1_Click);
             // 
             // buttonConvert2
             // 
-            this.buttonConvert2.Location = new System.Drawing.Point(334, 308);
+            this.buttonConvert2.Location = new System.Drawing.Point(277, 243);
             this.buttonConvert2.Name = "buttonConvert2";
             this.buttonConvert2.Size = new System.Drawing.Size(78, 46);
             this.buttonConvert2.TabIndex = 15;
+            this.buttonConvert2.TabStop = false;
             this.buttonConvert2.Text = "-";
             this.buttonConvert2.UseVisualStyleBackColor = true;
             this.buttonConvert2.Click += new System.EventHandler(this.ButtonConvert2_Click);
@@ -314,18 +268,14 @@ namespace HexConverter
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(891, 354);
+            this.ClientSize = new System.Drawing.Size(821, 354);
             this.Controls.Add(this.buttonConvert2);
             this.Controls.Add(this.buttonConvert1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.buttonDec2);
-            this.Controls.Add(this.buttonHex2);
             this.Controls.Add(this.textBoxDec2);
             this.Controls.Add(this.textBoxHex2);
             this.Controls.Add(this.labelDec);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonDec1);
-            this.Controls.Add(this.buttonHex1);
             this.Controls.Add(this.textBoxDec1);
             this.Controls.Add(this.textBoxHex1);
             this.Controls.Add(this.panelFormatsDec);
@@ -353,12 +303,8 @@ namespace HexConverter
 
         private System.Windows.Forms.TextBox textBoxHex1;
         private System.Windows.Forms.TextBox textBoxDec1;
-        private System.Windows.Forms.Button buttonHex1;
-        private System.Windows.Forms.Button buttonDec1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelDec;
-        private System.Windows.Forms.Button buttonDec2;
-        private System.Windows.Forms.Button buttonHex2;
         private System.Windows.Forms.TextBox textBoxDec2;
         private System.Windows.Forms.TextBox textBoxHex2;
         private System.Windows.Forms.ComboBox comboBoxFormatDec1;

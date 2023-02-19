@@ -12,6 +12,11 @@ namespace HexConverter
     {
         private PersistedState? _state;
 
+        private const string ActionToDec = "->";
+        private const string ActionToHex = "<-";
+        private const string ActionToNothing = "-";
+
+
         public FormMain()
         {
             InitializeComponent();
@@ -61,6 +66,38 @@ namespace HexConverter
             textBoxHex2.Tag = _state.IsDirtyHex2;
             textBoxDec1.Tag = _state.IsDirtyDec1;
             textBoxDec2.Tag = _state.IsDirtyDec2;
+
+            if (_state.IsDirtyHex1)
+            {
+                if (_state.IsDirtyDec1)
+                {
+                    ActivateConvertButton(buttonConvert1, ActionToNothing);
+                }
+                else
+                {
+                    ActivateConvertButton(buttonConvert1, ActionToHex);
+                }
+            }
+            else
+            {
+                ActivateConvertButton(buttonConvert1, ActionToDec);
+            }
+
+            if (_state.IsDirtyHex2)
+            {
+                if (_state.IsDirtyDec2)
+                {
+                    ActivateConvertButton(buttonConvert2, ActionToNothing);
+                }
+                else
+                {
+                    ActivateConvertButton(buttonConvert2, ActionToHex);
+                }
+            }
+            else
+            {
+                ActivateConvertButton(buttonConvert2, ActionToDec);
+            }
 
             formatDecToolStripButton.Checked = _state.ShowFormatDecChecked;
             if (formatDecToolStripButton.Checked)
@@ -265,17 +302,6 @@ namespace HexConverter
             return valid;
         }
 
-        private void ButtonClick(object sender, EventArgs e)
-        {
-            if (sender is Control control)
-            {
-                if (!Convert(control.Name))
-                {
-                    SystemSounds.Beep.Play();
-                }
-            }
-        }
-
         private static string GetControlNameSuffix(string name)
         {
             Debug.Assert(name.Length >= 4);
@@ -293,6 +319,11 @@ namespace HexConverter
                 "Dec2" => ConvertFromDec(textBoxHex2, textBoxDec2, comboBoxFormatDec2),
                 _ => false,
             };
+
+            if (!converted)
+            {
+                SystemSounds.Beep.Play();
+            }
 
             return converted;
         }
@@ -357,7 +388,7 @@ namespace HexConverter
         private void HideFormatsDec()
         {
             panelFormatsDec.Hide();
-            labelDec.Text = "UINT64";
+            labelDec.Text = "UINT64 Decimal";
             comboBoxFormatDec1.SelectedItem = "UINT64";
             comboBoxFormatDec2.SelectedItem = "UINT64";
             // TODO: consider the right-pane icon instead of the text
@@ -382,11 +413,13 @@ namespace HexConverter
                 {
                     SetDirty(textBoxHex1, true);
                     SetDirty(textBoxDec1, true);
+                    ActivateConvertButton(buttonConvert1, ActionToNothing);
                 }
                 else if (cb.Name == "comboBoxFormatDec2")
                 {
                     SetDirty(textBoxHex2, true);
                     SetDirty(textBoxDec2, true);
+                    ActivateConvertButton(buttonConvert2, ActionToNothing);
                 }
             }
         }
@@ -423,10 +456,6 @@ namespace HexConverter
         {
             _ = new AboutBoxMain(Text).ShowDialog();
         }
-
-        private const string ActionToDec = "->";
-        private const string ActionToHex = "<-";
-        private const string ActionToNothing = "-";
 
         private void TextBoxEnter(object sender, EventArgs e)
         {
@@ -482,6 +511,11 @@ namespace HexConverter
             {
                 SystemSounds.Beep.Play();
             }
+        }
+
+        private void TextBoxClick(object sender, EventArgs e)
+        {
+            TextBoxEnter(sender, e);
         }
     }
 }

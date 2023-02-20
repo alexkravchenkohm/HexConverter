@@ -481,6 +481,8 @@ namespace HexConverter
         private static void ActivateConvertButton(Button button, string action)
         {
             button.Text = action;
+            button.Font = new Font(button.Font, 
+                action == ActionToNothing? FontStyle.Bold : FontStyle.Regular);
             button.Enabled = action != ActionToNothing;
         }
 
